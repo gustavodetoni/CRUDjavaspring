@@ -1,12 +1,12 @@
 package com.example.crud.controllers;
 
+import com.example.crud.domain.produto.Produto;
 import com.example.crud.domain.produto.RepositoryProduto;
+import com.example.crud.domain.produto.RequestProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/produto")
@@ -17,5 +17,12 @@ public class ProdutoController {
     public ResponseEntity getAllProduto() {
         var allProduto = repository.findAll();
         return  ResponseEntity.ok(allProduto);
+    }
+
+    @PostMapping
+    public ResponseEntity postProduto(@RequestBody @Validated RequestProduto data) {
+        Produto newProduto = new Produto(data);
+        repository.save(newProduto);
+        return ResponseEntity.ok().build();
     }
 }
