@@ -12,7 +12,7 @@ import lombok.*;
 @EqualsAndHashCode(of = "id")
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String nome;
     private Integer preço;
@@ -21,4 +21,5 @@ public class Produto {
         this.nome = requestProduto.nome();
         this.preço = requestProduto.preço();
     }
+
 }
